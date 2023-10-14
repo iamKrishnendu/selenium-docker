@@ -1,0 +1,17 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-20201010
+    container_name: selenium-hub
+    ports:
+      - "5555:5555"
+
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-20201010
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=5555
