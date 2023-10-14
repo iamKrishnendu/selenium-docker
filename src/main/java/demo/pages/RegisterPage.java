@@ -52,6 +52,6 @@ public class RegisterPage {
         enterText(phoneText, "9009349087");
         scrollToElement(driver, submitButton);
         click(submitButton);
-
+        System.out.println("User "+firstName+" is registered successfully!");
     }
 }

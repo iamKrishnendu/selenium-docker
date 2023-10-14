@@ -3,9 +3,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,10 +17,10 @@ public class BaseTest {
     private static final int pageLoadTimeout = 20;
 
     @Parameters("browser")
-    @BeforeSuite(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void config(String browser){
         try{
-
+            System.out.println("Browser is "+browser);
             if(browser.equalsIgnoreCase("chrome")){
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--no-sandbox");
@@ -35,8 +33,9 @@ public class BaseTest {
                 firefoxOptions.addArguments("--no-sandbox");
                 firefoxOptions.addArguments("--disable-gpu");
                 firefoxOptions.addArguments("--headless");
+                firefoxOptions.addArguments("--enable-javascript");
                 s_logger.info("Initializing RemoteWebDriver at http://localhost:4444");
-                driver = new RemoteWebDriver(new URL("http://192.168.0.2:5555/wd/hub"), firefoxOptions);
+                driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), firefoxOptions);
             }
 
             driver.manage().window().maximize();
@@ -52,9 +51,8 @@ public class BaseTest {
 
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
         driver.close();
-        driver.quit();
     }
 }
