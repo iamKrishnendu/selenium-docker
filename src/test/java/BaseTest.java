@@ -26,7 +26,6 @@ public class BaseTest {
                 chromeOptions.addArguments("--no-sandbox");
                 chromeOptions.addArguments("--disable-gpu");
                  chromeOptions.addArguments("--headless");
-                s_logger.info("Initializing RemoteWebDriver at http://localhost:4444");
                 driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), chromeOptions);
             } else if (browser.equalsIgnoreCase("firefox")) {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -34,7 +33,6 @@ public class BaseTest {
                 firefoxOptions.addArguments("--disable-gpu");
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--enable-javascript");
-                s_logger.info("Initializing RemoteWebDriver at http://localhost:4444");
                 driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), firefoxOptions);
             }
 

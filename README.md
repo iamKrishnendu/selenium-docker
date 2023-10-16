@@ -15,3 +15,4 @@
 
 - `docker ps -a | to check docker installation status and running container status`
 - `docker-compose -f <path of docker-compose.yml file> up -d | to pull all listed images and excute through .yml file`
+- [docker-hub-link](https://hub.docker.com/_/registry/)
