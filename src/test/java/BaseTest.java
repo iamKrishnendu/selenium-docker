@@ -1,4 +1,7 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -34,6 +37,12 @@ public class BaseTest {
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--enable-javascript");
                 driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), firefoxOptions);
+            }else if(browser.equalsIgnoreCase("chrome-local")){
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+            }else if(browser.equalsIgnoreCase("firefox-local")){
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
             }
 
             driver.manage().window().maximize();
