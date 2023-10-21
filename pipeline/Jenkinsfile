@@ -3,7 +3,9 @@ pipeline{
 
     stages{
         stage("clone"){
-            sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
+            steps{
+                sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
+            }
         }
         stage("build"){
             steps{
