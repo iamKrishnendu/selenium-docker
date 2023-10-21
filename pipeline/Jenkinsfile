@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+
+    stages{
+        stage("clone"){
+            sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
+        }
+        stage("build"){
+            steps{
+                sh "mvn --version"
+                sh "mvn clean install"
+            }
+        }
+    }
+}
