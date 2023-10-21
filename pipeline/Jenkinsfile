@@ -18,11 +18,10 @@ pipeline{
                 sh "mvn clean install -Dbrowser=chrome"
             }
         }
-
-        post{
-            always{
-                cleanWs()
-            }
-        }
+    }
+    post{
+      always{
+        cleanWs()
+       }
     }
 }
