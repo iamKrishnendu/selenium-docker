@@ -1,31 +1,32 @@
-pipeline{
+pipeline {
     agent any
-    stages{
+    stages {
         stage("clone"){
             steps{
                 sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
             }
         }
-          stage("build-docker-compose"){
-             steps{
-                     sh "docker-compose -f ./docker/docker-compose.yml up -d"
-             }
-          }
-        stage("build"){
-         agent {
-            docker {
-                   image 'maven:3.3.3'
-              }
-           }
+        stage("build-docker-compose"){
             steps{
-                sh "mvn --version"
-                sh "mvn clean install -Dbrowser=chrome"
+                sh "docker-compose -f ./docker/docker-compose.yml up -d"
+            }
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.3.3'
+                }
+            }
+            steps {
+                sh 'mvn --version'
+                sh 'mvn clean install -Dbrowser=chrome'
             }
         }
     }
-    post{
-      always{
+
+post{
+     always{
         cleanWs()
-       }
+        }
     }
 }
