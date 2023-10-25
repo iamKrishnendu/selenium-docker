@@ -6,11 +6,7 @@ pipeline {
                 sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
             }
         }
-        stage("build-docker-compose"){
-            steps{
-                sh "docker-compose -f ./docker/docker-compose.yml up -d"
-            }
-        }
+
         stage('Build') {
             steps {
                 sh 'mvn --version'
