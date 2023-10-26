@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn --version'
-                sh 'mvn clean install -Dbrowser=chrome'
+                sh 'mvn clean install -Dbrowser=chrome-local'
             }
         }
     }
