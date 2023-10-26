@@ -6,8 +6,12 @@ pipeline {
                 sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
             }
         }
-
-        stage('Build') {
+        stage("build-docker-compose"){
+            steps{
+                sh "docker-compose -f ./docker/docker-compose.yml up -d"
+            }
+        }
+        stage('build') {
             steps {
                 sh 'mvn --version'
                 sh 'mvn clean install -Dbrowser=chrome-local'
