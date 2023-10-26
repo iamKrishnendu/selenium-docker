@@ -8,7 +8,8 @@ pipeline {
         }
         stage("build-docker-compose"){
             steps{
-                sh 'cd ./docker'
+                sh 'cd ./docker/'
+                sh 'ls'
                 sh 'docker-compose up -d'
             }
         }
