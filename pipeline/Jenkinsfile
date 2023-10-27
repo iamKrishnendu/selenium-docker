@@ -6,11 +6,6 @@ pipeline {
                 sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
             }
         }
-        stage('launch grid'){
-            steps{
-                sh 'java -jar .\\dependentJar\\selenium-server-4.14.1.jar standalone --port 4444'
-            }
-        }
         stage('build') {
             steps {
                 sh 'mvn --version'
