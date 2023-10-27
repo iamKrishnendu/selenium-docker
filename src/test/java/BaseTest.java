@@ -29,14 +29,14 @@ public class BaseTest {
                 chromeOptions.addArguments("--no-sandbox");
                 chromeOptions.addArguments("--disable-gpu");
                  chromeOptions.addArguments("--headless");
-                driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), chromeOptions);
+                driver = new RemoteWebDriver(new URL("http://192.168.0.7:4444/wd/hub"), chromeOptions);
             } else if (browser.equalsIgnoreCase("firefox")) {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--no-sandbox");
                 firefoxOptions.addArguments("--disable-gpu");
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--enable-javascript");
-                driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), firefoxOptions);
+                driver = new RemoteWebDriver(new URL("http://192.168.0.7:4444/wd/hub"), firefoxOptions);
             }else if(browser.equalsIgnoreCase("chrome-local")){
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
