@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   chrome:
     image: selenium/node-chrome:4.13.0-20231004
@@ -25,3 +25,13 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+  maven-builder:
+    image: maven:4.0.0-rc-4-eclipse-temurin-17-noble
+    container_name: maven-builder-container
+    working_dir: /usr/src/app
+    volumes:
+        - .:/usr/src/app  # Mounts your local project directory into the container
+        - maven-cache:/root/.m2  # Caches Maven dependencies to speed up builds
+    command: mvn clean install
+volumes:
+    maven-cache:

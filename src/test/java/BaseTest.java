@@ -29,14 +29,14 @@ public class BaseTest {
                 chromeOptions.addArguments("--no-sandbox");
                 chromeOptions.addArguments("--disable-gpu");
                  chromeOptions.addArguments("--headless");
-                driver = new RemoteWebDriver(new URL("http://192.168.0.7:4444/wd/hub"), chromeOptions);
+                driver = new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
             } else if (browser.equalsIgnoreCase("firefox")) {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--no-sandbox");
                 firefoxOptions.addArguments("--disable-gpu");
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--enable-javascript");
-                driver = new RemoteWebDriver(new URL("http://192.168.0.7:4444/wd/hub"), firefoxOptions);
+                driver = new RemoteWebDriver(new URL("http://localhost:4444"), firefoxOptions);
             }else if(browser.equalsIgnoreCase("chrome-local")){
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -60,6 +60,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
-        driver.close();
+        driver.quit();
     }
 }
