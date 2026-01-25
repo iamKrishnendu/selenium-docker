@@ -7,7 +7,7 @@ services:
     shm_size: 2g
 
   jenkins:
-    build: .
+    image: jenkins/jenkins:lts
     container_name: jenkins
     ports:
       - "8080:8080"
