@@ -33,12 +33,12 @@ pipeline {
         }
         stage('test') {
              steps {
-               sh '''
-                mvn test \
-               -Dbrowser=${params.BROWSER} \
-               -DisRemote=${params.IS_REMOTE} \
-               -Dselenium.url=http://selenium:4444/wd/hub
-               '''
+               sh """
+                   mvn test \
+                   -Dbrowser=${params.BROWSER} \
+                   -DisRemote=${params.IS_REMOTE} \
+                   -Dselenium.url=http://selenium:4444/wd/hub
+                  """
             }
         }
     }
