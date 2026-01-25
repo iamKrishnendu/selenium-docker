@@ -7,11 +7,10 @@ services:
     shm_size: 2g
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build: .
     container_name: jenkins
     ports:
       - "8080:8080"
-      - "80:5000"
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
