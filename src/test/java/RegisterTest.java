@@ -7,10 +7,7 @@ public class RegisterTest extends BaseTest {
 
     RegisterPage registerPage;
     SoftAssert softAssert;
-    @BeforeClass
-    public void initTest(){
 
-    }
     @Test
     public void register_a_dynamic_user_test(){
         registerPage = new RegisterPage(driver);

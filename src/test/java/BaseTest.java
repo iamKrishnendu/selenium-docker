@@ -1,19 +1,8 @@
 import demo.driverFactory.DriverManager;
-import demo.enums.BrowserType;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +20,6 @@ public class BaseTest {
             @Optional("true") String isRemote
     ) {
         try{
-
             driver = DriverManager.getDriver(browser, Boolean.parseBoolean(isRemote));
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
@@ -46,7 +34,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
-        driver.quit();
         DriverManager.unloadDriver();
     }
 }

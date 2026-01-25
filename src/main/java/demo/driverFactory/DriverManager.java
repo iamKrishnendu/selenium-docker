@@ -27,6 +27,7 @@ public class DriverManager {
         if (driver.get() == null) {
 
             try{
+                s_logger.info("Specified Browser : {}", browserOption);
                 s_logger.info("check the Remote flag {}", isRemote);
                 if(isRemote){
                     BrowserType browserType =
@@ -62,6 +63,7 @@ public class DriverManager {
     }
 
     public static void unloadDriver(){
+        driver.get().quit();
         driver.remove();
     }
 }

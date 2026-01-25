@@ -6,13 +6,33 @@
 
 
 ### setup and execution
-- download docker desktop
+
+ #### Local Execution
 - `git clone <repository url>`
-- `mvn clean install` for first time execution
-- `mvn clean test` for regular execution
+- `mvn clean compile` 
+- `mvn test -Dbrowser=chrome -DisRemote=false`
 
-### Notes
+#### Remote Execution
+- `git clone <repository url>`
+-  `cd ./dependentJar/ && java -jar selenium-server-4.14.1.jar standalone`
+- `mvn clean compile` 
+- `mvn test -Dbrowser=chrome -DisRemote=true`
 
-- `docker ps -a | to check docker installation status and running container status`
-- `docker-compose -f <path of docker-compose.yml file> up -d | to pull all listed images and excute through .yml file`
-- [docker-hub-link](https://hub.docker.com/_/registry/)
+#### Execution on Docker based Jenkins container
+- Download [docker-desktop](https://docs.docker.com/desktop/)
+- `git clone <repository url>`
+-  Navigate to the project root
+- `docker compose pull`
+- `docker compose up -d`
+- Navigate to `localhost:4444` (for Selenium grid)
+- Navigate to `localhost:8080` (for Jenkins local)
+
+
+### Notes : Some important Docker commands
+
+- `docker pull jenkins/jenkins:lts : To download Jenkins image`
+- `docker image : To get downloaded images`
+- `docker ps -a : To get the list of all containers`
+- `docker exec -it <docker container id> /bin/bash : Get into docker container`
+- To check available images on Docker repo follow the link below:
+  - [docker-hub-link](https://hub.docker.com/_/registry/)

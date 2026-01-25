@@ -1,6 +1,19 @@
 pipeline {
     agent any
 
+    parameters{
+        string(
+            name: 'BROWSER',
+            defaultValue: 'chrome',
+            description: 'Browser to run tests'
+        )
+        string(
+                    name: 'IS_REMOTE',
+                    defaultValue: 'true',
+                    description: 'Run tests on Selenium Grid'
+                )
+    }
+
     tools {
             maven 'maven-3.9.12'
             jdk 'jdk17'
@@ -22,8 +35,8 @@ pipeline {
              steps {
                sh '''
                mvn test \
-               -Dbrowser=chrome \
-               -DisRemote=true \
+               -Dbrowser=${params.BROWSER} \
+               -DisRemote=${params.IS_REMOTE} \
                -Dselenium.url=http://selenium:4444/wd/hub
                '''
             }
@@ -33,6 +46,15 @@ pipeline {
 post{
      always{
         echo "Build ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}."
+        junit '**/target/surefire-reports/*.xml'
+        publishHTML(target: [
+                    reportName: 'TestNG HTML Report',
+                    reportDir: 'target/surefire-reports',
+                    reportFiles: 'index.html',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true
+                ])
+
         cleanWs()
         }
     }
