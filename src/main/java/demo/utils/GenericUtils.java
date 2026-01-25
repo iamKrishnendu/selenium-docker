@@ -1,6 +1,7 @@
 package demo.utils;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -16,7 +17,7 @@ public class GenericUtils {
         element.click();
     }
 
-    public static void scrollToElement(RemoteWebDriver driver, WebElement element){
+    public static void scrollToElement(WebDriver driver, WebElement element){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }

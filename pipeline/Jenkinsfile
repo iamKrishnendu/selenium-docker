@@ -1,15 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage("clone"){
+        stage("checkout"){
             steps{
-                sh "git clone https://github.com/iamKrishnendu/selenium-docker.git"
+                checkout scm
             }
         }
         stage('build') {
             steps {
-                sh 'mvn --version'
-                sh 'mvn clean install -Dbrowser=chrome'
+                sh 'mvn clean compile'
+            }
+        }
+        stage('test') {
+             steps {
+               sh 'mvn test -Dbrowser=chrome -DisRemote=yes'
             }
         }
     }

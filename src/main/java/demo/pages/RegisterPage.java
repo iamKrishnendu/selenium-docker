@@ -13,9 +13,9 @@ import java.util.UUID;
 
 public class RegisterPage {
 
-    RemoteWebDriver driver;
+    WebDriver driver;
 
-    public RegisterPage(RemoteWebDriver driver){
+    public RegisterPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 15), this);
     }

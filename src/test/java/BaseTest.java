@@ -1,4 +1,7 @@
+import demo.driverFactory.DriverManager;
+import demo.enums.BrowserType;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,57 +12,38 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    public RemoteWebDriver driver;
+    public WebDriver driver;
     private static final Logger s_logger = LoggerFactory.getLogger(BaseTest.class);
     private static final String APPLICATION_URL = "https://demo.automationtesting.in/Register.html";
     private static final int pageLoadTimeout = 20;
 
-    @Parameters("browser")
+    @Parameters({"browser", "isRemote"})
     @BeforeMethod(alwaysRun = true)
-    public void config(String browser){
+    public void config(String browser, String isRemote) {
         try{
-            System.out.println("Browser is "+browser);
-            if(browser.equalsIgnoreCase("chrome")){
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--no-sandbox");
-                chromeOptions.addArguments("--disable-gpu");
-                 chromeOptions.addArguments("--headless");
-                driver = new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
-            } else if (browser.equalsIgnoreCase("firefox")) {
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--no-sandbox");
-                firefoxOptions.addArguments("--disable-gpu");
-                firefoxOptions.addArguments("--headless");
-                firefoxOptions.addArguments("--enable-javascript");
-                driver = new RemoteWebDriver(new URL("http://localhost:4444"), firefoxOptions);
-            }else if(browser.equalsIgnoreCase("chrome-local")){
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-            }else if(browser.equalsIgnoreCase("firefox-local")){
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-            }
 
+            driver = DriverManager.getDriver(browser, Boolean.parseBoolean(isRemote));
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
             driver.get(APPLICATION_URL);
-            driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(Duration.of(pageLoadTimeout, TimeUnit.SECONDS.toChronoUnit()));
+            driver.manage().timeouts().implicitlyWait(Duration.of(pageLoadTimeout, TimeUnit.SECONDS.toChronoUnit()));
             s_logger.info("Application current url is {}", driver.getCurrentUrl());
-
-        } catch (IOException ie){
-            ie.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
     }
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
         driver.quit();
+        DriverManager.unloadDriver();
     }
 }
