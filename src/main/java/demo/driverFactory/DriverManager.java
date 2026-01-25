@@ -32,6 +32,7 @@ public class DriverManager {
             Capabilities capabilities =
                     BrowserCapabilities.getOptions(browserType);
             try{
+                s_logger.info("check the Remote flag {}", isRemote);
                 if(isRemote){
                     driver.set(
                             new RemoteWebDriver(
@@ -49,6 +50,7 @@ public class DriverManager {
                 s_logger.error("URL exception occurred!");
             }
         }
+        s_logger.info("REMOTE DRIVER INSTANCE: {}", driver.get() instanceof RemoteWebDriver);
         return driver.get();
     }
 
