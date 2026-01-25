@@ -16,12 +16,16 @@ public final class BrowserCapabilities {
 
             case CHROME:
                 ChromeOptions chrome = new ChromeOptions();
-                chrome.addArguments("--disable-gpu");
+                chrome.addArguments("--headless=new");
+                chrome.addArguments("--no-sandbox");
+                chrome.addArguments("--disable-dev-shm-usage");
                 return chrome;
 
             case FIREFOX:
                 FirefoxOptions firefox = new FirefoxOptions();
-                firefox.addArguments("--disable-gpu", "--headless");
+                firefox.addArguments("--headless=new");
+                firefox.addArguments("--no-sandbox");
+                firefox.addArguments("--disable-dev-shm-usage");
                 return firefox;
 
             default:

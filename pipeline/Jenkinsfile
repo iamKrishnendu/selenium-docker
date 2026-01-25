@@ -23,7 +23,8 @@ pipeline {
                sh '''
                mvn test \
                -Dbrowser=chrome \
-               -DisRemote=yes \
+               -DisRemote=true \
+               -Dselenium.url=http://selenium:4444/wd/hub
                '''
             }
         }

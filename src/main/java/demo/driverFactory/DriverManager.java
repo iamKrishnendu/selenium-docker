@@ -17,7 +17,7 @@ public class DriverManager {
 
     private static final Logger s_logger = LoggerFactory.getLogger(DriverManager.class);
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static final String LOCAL_HOST_HUB = "http://localhost:4444";
+
 
     private DriverManager(){}
 
@@ -26,17 +26,24 @@ public class DriverManager {
 
         if (driver.get() == null) {
 
-            BrowserType browserType =
-                    BrowserType.valueOf(browserOption.toUpperCase());
-
-            Capabilities capabilities =
-                    BrowserCapabilities.getOptions(browserType);
             try{
                 s_logger.info("check the Remote flag {}", isRemote);
                 if(isRemote){
+                    BrowserType browserType =
+                            BrowserType.valueOf(browserOption.toUpperCase());
+
+                    Capabilities capabilities =
+                            BrowserCapabilities.getOptions(browserType);
+
+                    String seleniumUrl = System.getProperty(
+                            "selenium.url",
+                            "http://selenium:4444/wd/hub"
+                    );
+
+                    s_logger.info("Starting REMOTE driver at {}", seleniumUrl);
                     driver.set(
                             new RemoteWebDriver(
-                                    new URL(LOCAL_HOST_HUB),
+                                    new URL(seleniumUrl),
                                     capabilities
                             )
                     );

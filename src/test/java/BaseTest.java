@@ -26,7 +26,10 @@ public class BaseTest {
 
     @Parameters({"browser", "isRemote"})
     @BeforeMethod(alwaysRun = true)
-    public void config(String browser, String isRemote) {
+    public void config(
+            @Optional("chrome") String browser,
+            @Optional("true") String isRemote
+    ) {
         try{
 
             driver = DriverManager.getDriver(browser, Boolean.parseBoolean(isRemote));
