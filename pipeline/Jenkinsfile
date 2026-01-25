@@ -20,7 +20,11 @@ pipeline {
         }
         stage('test') {
              steps {
-               sh 'mvn test -Dbrowser=chrome -DisRemote=yes'
+               sh '''
+               mvn test \
+               -Dbrowser=chrome \
+               -DisRemote=yes \
+               '''
             }
         }
     }
