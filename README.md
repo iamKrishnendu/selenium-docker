@@ -31,6 +31,7 @@
 ### Notes : Some important Docker commands
 
 - `docker pull jenkins/jenkins:lts : To download Jenkins image`
+- `docker run -p 80:8080 <image_id> jenkins/jenkins : To run Jenkins container and expose to 80 port in local`
 - `docker image : To get downloaded images`
 - `docker ps -a : To get the list of all containers`
 - `docker exec -it <docker container id> /bin/bash : Get into docker container`
