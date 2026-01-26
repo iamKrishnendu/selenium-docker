@@ -4,16 +4,9 @@
 
     <test name = "Demo site test chrome" verbose="2" thread-count="3">
         <parameter name="browser" value="chrome"/>
-        <parameter name="isRemote" value= "false"/>
+        <parameter name="isRemote" value= "true"/>
        <classes>
            <class name="RegisterTest"/>
        </classes>
     </test>
-<!--    <test name = "Demo site test firefox" verbose="2" thread-count="3">-->
-<!--        <parameter name="browser" value="firefox"/>-->
-<!--        <parameter name="isRemote" value= "false"/>-->
-<!--        <classes>-->
-<!--            <class name="RegisterTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
 </suite> <!-- Suite -->

@@ -38,7 +38,7 @@ public class DriverManager {
 
                     String seleniumUrl = System.getProperty(
                             "selenium.url",
-                            "http://selenium:4444/wd/hub"
+                            "http://localhost:4444/wd/hub"
                     );
 
                     s_logger.info("Starting REMOTE driver at {}", seleniumUrl);

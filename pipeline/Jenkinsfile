@@ -46,14 +46,14 @@ pipeline {
 post{
      always{
         echo "Build ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}."
-//         junit '**/target/surefire-reports/junitreports/TEST-*.xml'
-//         publishHTML(target: [
-//                     reportName: 'TestNG HTML Report',
-//                     reportDir: 'target/surefire-reports/junitreports',
-//                     reportFiles: 'index.html',
-//                     keepAll: true,
-//                     alwaysLinkToLastBuild: true
-//                 ])
+        junit '**/target/surefire-reports/junitreports/TEST-*.xml'
+        publishHTML(target: [
+                    reportName: 'TestNG HTML Report',
+                    reportDir: 'target/surefire-reports/junitreports',
+                    reportFiles: 'index.html',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true
+                ])
 
         cleanWs()
         }
